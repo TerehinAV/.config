@@ -26,21 +26,40 @@
         "x86_64-linux"
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+      mkDarwinConfiguration =
+        system:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            darwin-login-items.darwinModules.default
+            (
+              { pkgs, ... }:
+              import ./darwin.nix {
+                inherit self pkgs user;
+              }
+            )
+          ];
+        };
     in
     {
-      darwinConfigurations.${user.hostname} = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."Arturs-MacBook-Pro" = mkDarwinConfiguration "aarch64-darwin";
+      darwinConfigurations."MacBook-Pro-Andrej-2" = mkDarwinConfiguration "x86_64-darwin";
+
+      homeConfigurations.${user.username} = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+          config = {
+            allowUnfree = true;
+            android_sdk.accept_license = true;
+          };
+        };
         modules = [
-          darwin-login-items.darwinModules.default
-          (
-            { pkgs, ... }:
-            import ./darwin.nix {
-              inherit self pkgs user;
-            }
-          )
+          ./home.nix
+          { _module.args = { inherit user; }; }
         ];
       };
 
-      homeConfigurations.${user.username} = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.andrey = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "aarch64-darwin";
           config = {

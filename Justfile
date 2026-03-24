@@ -99,12 +99,14 @@ nix-mac:
 
 [working-directory("./nix")]
 nix-darwin-mac:
-    sudo -v && sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix
+    sudo -v
+    sudo sh -c 'for f in /etc/bashrc /etc/zshrc; do if [ -f "$f" ]; then backup="$f.before-nix-darwin"; if [ ! -e "$backup" ]; then mv "$f" "$backup"; else ts=$(date +%Y%m%d%H%M%S); mv "$f" "$backup.$ts"; fi; fi; done'
+    sudo -v && sudo -H env NIX_CONFIG="experimental-features = nix-command flakes" nix run nix-darwin/master#darwin-rebuild -- switch --flake /Users/andrey/.config/nix#$(hostname -s)
     @echo "Successfully applied Nix configuration for macOS."
 
 [working-directory("./nix")]
 nix-home-mac:
-    nix run home-manager/master -- switch -b backup --flake ~/.config/nix
+    nix run home-manager/master -- switch -b backup --flake ~/.config/nix#andrey
     @echo "Successfully applied Home Manager configuration for macOS."
 
 [working-directory("./nix")]
@@ -216,6 +218,3 @@ clean-linux:
     
     @echo "\n=== Done! ==="
     df -h /
-
-
-

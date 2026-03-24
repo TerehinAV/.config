@@ -1,4 +1,9 @@
-{ self, pkgs, user, ... }:
+{
+  self,
+  pkgs,
+  user,
+  ...
+}:
 let
   emacsDaemonStarter = pkgs.writeShellScriptBin "emacs-daemon-starter" ''
     exec /opt/homebrew/bin/emacs --fg-daemon=server --eval '(server-start)'
@@ -7,7 +12,7 @@ in
 {
   environment.systemPackages = with pkgs; [
     vim
-    nixfmt-rfc-style
+    nixfmt
     xonsh
   ];
 
@@ -162,7 +167,6 @@ in
 
   system.configurationRevision = self.rev or self.dirtyRev or null;
   system.stateVersion = 5;
-  nixpkgs.hostPlatform = "aarch64-darwin";
 
   nixpkgs.config = {
     permittedInsecurePackages = [
@@ -185,7 +189,6 @@ in
       "automake"
       "autoconf"
       "dbus"
-      "gcc"
       "libgccjit"
       "pkgconf"
       "meson"
@@ -208,28 +211,24 @@ in
 
       # System tools
       "coreutils"
-      "openvpn"
+      # "openvpn"
       "nmap"
       "gomi"
       "gpg"
-      "wireguard-tools"
+      # "wireguard-tools"
       "mas"
       "terminal-notifier"
 
       # Window management (system integration required)
-      {
-        name = "koekeishiya/formulae/yabai";
-      }
-      {
-        name = "FelixKratz/formulae/borders";
-        restart_service = false;
-      }
-      { name = "koekeishiya/formulae/skhd"; }
+      # {
+      #   name = "koekeishiya/formulae/yabai";
+      # }
+      # { name = "koekeishiya/formulae/skhd"; }
       # "sketchybar"
       # Development tools (keep in Homebrew for reasons)
       "moar"
       "uv"
-      "ipython"
+      # "ipython"
       "ncdu"
       "awk"
       "go"
@@ -239,73 +238,71 @@ in
       "gnu-sed"
       "make"
       "gnu-tar"
-      "clojure"
-      "clojure/tools/clojure"
-      "spoof-mac"
-      "google-java-format"
-      "lua-language-server"
+      # "clojure"
+      # "clojure/tools/clojure"
+      # "spoof-mac"
+      # "google-java-format"
+      # "lua-language-server"
       "wakatime-cli"
-      "proctools"
+      # "proctools"
       "jj"
-      "sdkman/tap/sdkman-cli"
+      # "sdkman/tap/sdkman-cli"
       "mkcert"
       "cocoapods"
       "staticcheck"
       "volta"
       "superfile"
-      "lazygit"
-      "dtach"
-      "bandwhich"
-      "poetry"
-      "pandoc"
-      "jqp"
-      "podman"
-      "cloc"
-      "claude-squad"
+      # "lazygit"
+      # "dtach"
+      # "bandwhich"
+      # "poetry"
+      # "pandoc"
+      # "jqp"
+      # "podman"
+      # "cloc"
+      # "claude-squad"
       "opencode"
-      "git-delta"
-      "harper"
-      "pdf2svg"
+      # "git-delta"
+      # "harper"
+      # "pdf2svg"
       "fzf"
-      "graphviz"
+      # "graphviz"
       "direnv"
       "zellij"
       # "helix"
-      {
-        name = "d12frosted/emacs-plus/emacs-plus@30";
-        restart_service = true;
-        args = [
-          "with-xwidgets"
-          "with-imagemagick"
-          "with-dbus"
-          "with-compress-install"
-        ];
-      }
+      # {
+      #   name = "d12frosted/emacs-plus/emacs-plus@30";
+      #   restart_service = true;
+      #   args = [
+      #     "with-xwidgets"
+      #     "with-imagemagick"
+      #     "with-dbus"
+      #     "with-compress-install"
+      #   ];
+      # }
 
       # "jackett"
       # "acsandmann/tap/rift"
       "just"
-      "resterm"
-      "cava"
-      "pipes-sh"
-      "Artawower/tap/wallboy"
-      "vips"
-      "borkdude/brew/babashka"
-      "clojure-lsp/brew/clojure-lsp-native"
-      "gleam"
-      "erlang"
-      "llvm"
-      "ast-grep"
-      "quicktype"
-      "rustup"
-      "fontforge"
-      "oven-sh/bun/bun"
+      # "resterm"
+      # "cava"
+      # "pipes-sh"
+      # "vips"
+      # "borkdude/brew/babashka"
+      # "clojure-lsp/brew/clojure-lsp-native"
+      # "gleam"
+      # "erlang"
+      # "llvm"
+      # "ast-grep"
+      # "quicktype"
+      # "rustup"
+      # "fontforge"
       "rust"
       "ripgrep"
-      "gitu"
-      "pinentry-mac"
-      "lgug2z/tap/komorebi-for-mac"
-      "gopls"
+      # "gitu"
+      # "pinentry-mac"
+      # "lgug2z/tap/komorebi-for-mac"
+      # "gopls"
     ];
     taps = [
       "BarutSRB/tap"
@@ -331,77 +328,77 @@ in
       "font-monaspace-nf" # Monaspace Nerd Font (with icons)
 
       # "betterdisplay@2.2.10"
-      "lulu"
+      # "lulu"
       "vlc"
-      "marta"
-      "ghostty"
-      "freefilesync"
+      # "marta"
+      # "ghostty"
+      # "freefilesync"
       "orbstack"
       "wezterm"
-      "freedom"
-      "flameshot"
+      # "freedom"
+      # "flameshot"
       "pearcleaner"
-      "krtirtho/apps/spotube"
-      "discord"
-      {
-        name = "stretchly";
-        args = {
-          no_quarantine = true;
-        };
-      }
-      "applite"
+      # "krtirtho/apps/spotube"
+      # "discord"
+      # {
+      #   name = "stretchly";
+      #   args = {
+      #     no_quarantine = true;
+      #   };
+      # }
+      # "applite"
       "obsidian"
       "neohtop"
-      "db-browser-for-sqlite"
+      # "db-browser-for-sqlite"
       "jordanbaird-ice"
-      "zen"
+      # "zen"
       "karabiner-elements"
-      "loom"
-      "zoom"
+      # "loom"
+      # "zoom"
       "shottr"
       "clop"
       "input-source-pro"
-      "mongodb-compass"
-      "cyberduck"
-      "rustdesk"
-      "wakatime"
-      "rescuetime"
-      "arc"
+      # "mongodb-compass"
+      # "cyberduck"
+      # "rustdesk"
+      # "wakatime"
+      # "rescuetime"
+      # "arc"
       "openvpn-connect"
-      "hoppscotch"
-      "cursor"
-      "mattermost"
-      "ticktick"
+      # "hoppscotch"
+      # "cursor"
+      # "mattermost"
+      # "ticktick"
       # "ollama"
       "raycast"
-      "zen@twilight"
-      "ghostty"
+      # "zen@twilight"
+      # "ghostty"
       # "th-ch/youtube-music/youtube-music"
       # "swiftbar"
       "licecap"
       "nikitabobko/tap/aerospace"
       "amneziavpn"
-      "dotnet-sdk"
-      "dotnet-sdk@9"
+      # "dotnet-sdk"
+      # "dotnet-sdk@9"
       # "rust-disk-cleaner"
       # "macforge"
       "telegram-desktop"
-      "bitwarden"
-      "whatsapp"
-      "keycastr"
-      "kamillobinski/thock/thock"
+      # "bitwarden"
+      # "whatsapp"
+      # "keycastr"
+      # "kamillobinski/thock/thock"
       "stats"
-      "freefilesync"
+      # "freefilesync"
       "zed"
-      "chia"
+      # "chia"
       "aldente"
-      "voiceink"
-      "chatgpt"
-      "alt-tab"
-      "yandex-disk"
+      # "voiceink"
+      # "chatgpt"
+      # "alt-tab"
+      # "yandex-disk"
       "claude-code"
-      "thock"
-      "android-studio"
+      # "thock"
+      # "android-studio"
       "claude-code"
       # "omniwm"
     ];
