@@ -47,3 +47,4 @@ if _platform.system() == 'Linux':
         $XDG_DATA_DIRS.insert(0, _nix_share)
     del _nix_share
 del _platform
+source "$HOME/.cargo/env.xsh"

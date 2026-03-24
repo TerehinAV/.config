@@ -1148,7 +1148,7 @@ default_mode "locked"
 // default_shell "/Users/darkawower/.nix-profile/bin/fish"
 // default_shell "/opt/homebrew/bin/xonsh"
 // default_shell "/Users/darkawower/.nix-profile/bin/xonsh"
-default_shell "xonsh"
+default_shell "zsh"
 // Choose the path to override cwd that zellij will use for opening new panes
 //
 // default_cwd "/tmp"
