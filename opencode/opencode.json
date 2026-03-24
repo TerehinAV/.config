@@ -195,30 +195,6 @@
       "type": "local",
       "command": ["npx", "-y", "@upstash/context7-mcp@latest"]
     },
-    "codex-cli": {
-      "type": "local",
-      "enabled": false,
-      "command": ["mcp-codex-cli", "--allow-npx"]
-    },
-    "gemini": {
-      "type": "local",
-      "enabled": false,
-      "command": ["npx", "-y", "gemini-mcp-tool"]
-    },
-    "deepcontext": {
-      "type": "local",
-      "command": ["npx", "-y", "@wildcard-ai/deepcontext@latest"]
-    },
-    "sentry": {
-      "type": "local",
-      "enabled": false,
-      "command": [
-        "npx",
-        "-y",
-        "mcp-remote@latest",
-        "https://mcp.sentry.dev/mcp"
-      ]
-    },
     "serena": {
       "type": "local",
       "command": [
@@ -234,34 +210,6 @@
     "playwright": {
       "type": "local",
       "command": ["npx", "@playwright/mcp@latest"]
-    },
-    "youtrack": {
-      "type": "local",
-      "command": [
-        "npx",
-        "mcp-remote",
-        "https://verifika.youtrack.cloud/mcp",
-        "--header",
-        "{env:YOUTRACK_AUTH_HEADER}"
-      ]
-    },
-    "qwen": {
-      "type": "local",
-      "enabled": false,
-      "command": ["npx", "-y", "jeffery9/qwen-mcp-tool"]
-    },
-    "deepseek": {
-      "type": "local",
-      "enabled": false,
-      "command": ["npx", "-y", "deepseek-mcp-server"]
-    },
-    "toon-context": {
-      "type": "local",
-      "enabled": false,
-      "command": [
-        "bun",
-        "/Users/darkawower/apps/TOON-context-mcp-server/toon-context-mcp/build/index.js"
-      ]
     }
   }
 }
