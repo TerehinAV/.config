@@ -2,20 +2,50 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "google_auth": false,
   "agents": {
+    "prometheus": {
+      "model": "github-copilot/gpt-5.4"
+    },
+    "plan": {
+      "model": "zai-coding-plan/glm-5.1"
+    },
+    "oracle": {
+      "model": "zai-coding-plan/glm-5.1"
+    },
+    "metis": {
+      "model": "zai-coding-plan/glm-5"
+    },
+    "hephaestus": {
+      "model": "zai-coding-plan/glm-5.1"
+    },
+    "momus": {
+      "model": "github-copilot/gpt-5.4-mini"
+    },
     "librarian": {
       "model": "opencode/glm-4.7-free"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "zai-coding-plan/glm-4.7-flashx"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "github-copilot/gpt-5-mini"
     },
     "document-writer": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "opencode/glm-4.7-free"
     },
     "multimodal-looker": {
       "model": "google/antigravity-gemini-3-flash"
+    },
+    "general": {
+      "model": "github-copilot/gpt-5-mini"
+    },
+    "compaction": {
+      "model": "opencode/gpt-5-nano"
+    },
+    "summary": {
+      "model": "opencode/gpt-5-nano"
+    },
+    "title": {
+      "model": "opencode/gpt-5-nano"
     }
   }
 }

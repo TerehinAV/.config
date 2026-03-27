@@ -8,6 +8,7 @@
   "agent": {
     "translator": {
       "description": "Manually edits i18n dictionary files. Always updates keys and values by hand according to provided i18n errors and user-specified words. Automatic generation is strictly forbidden, as is removing existing words. Must use jq utility for nested dictionaries.",
+      "model": "github-copilot/gpt-4.1",
       "mode": "subagent",
       "prompt": "{file:./prompts/translator.txt}",
       "tools": {
