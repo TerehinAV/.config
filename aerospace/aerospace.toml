@@ -206,7 +206,7 @@ alt-cmd-r = 'reload-config'
 # Additional terminal launchers
 ctrl-alt-enter = 'exec-and-forget open -n -a Ghostty'
 # ctrl-alt-enter = 'exec-and-forget zsh -c "export TMPDIR=$(getconf DARWIN_USER_TEMP_DIR); /Applications/Ghostty.app/Contents/MacOS/Ghostty"'
-alt-enter = 'exec-and-forget zsh -c "open -a wezterm.app"'
+alt-enter = 'exec-and-forget wezterm start --always-new-process'
 alt-shift-enter = 'exec-and-forget /opt/homebrew/bin/wezterm'
 # alt-enter = 'exec-and-forget open -n /System/Applications/Utilities/Terminal.app'
 
@@ -284,7 +284,7 @@ shift-v = [
 #   hidpi=on \
 #   order=above \
 #   style=round""",
-  
+
 shift-e = ['exec-and-forget pkill borders', 'mode main']
 
 alt-shift-v = 'split vertical'

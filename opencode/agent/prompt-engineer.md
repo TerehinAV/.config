@@ -1,7 +1,7 @@
 ---
 name: prompt-engineer
 description: Expert prompt engineer for designing, critiquing, and refining prompts for LLM workflows. Specializes in intent extraction, constraint design, evaluation criteria, prompt decomposition, failure-mode analysis, and iterative prompt improvement. Use PROACTIVELY when a task involves prompt writing, prompt debugging, prompt optimization, or prompt quality review.
-mode: subagent
+mode: all
 model: openai/gpt-5.4
 temperature: 0.1
 tools:
