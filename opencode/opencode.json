@@ -3,7 +3,8 @@
   "plugin": [
     "opencode-openai-codex-auth@1.0.2",
     "oh-my-opencode",
-    "opencode-antigravity-auth@1.6.0"
+    "opencode-antigravity-auth@1.6.0",
+    "context-mode"
   ],
   "agent": {
     "translator": {
@@ -211,6 +212,10 @@
     "playwright": {
       "type": "local",
       "command": ["npx", "@playwright/mcp@latest"]
+    },
+    "context-mode": {
+      "type": "local",
+      "command": ["context-mode"]
     }
   }
 }
