@@ -52,6 +52,8 @@ opencode/plugin
 
 .DS_Store
 
+opencode/context-mode/sessions
+
 # Ignore backup files created by scripts/editors
 # Note: .gitignore doesn't support brace expansion like {number}?
 # These patterns cover .bak, .backup, and numbered variants (.bak1, .bak2, ...)
