@@ -1,15 +1,7 @@
 /*
-!backup
 !fonts
-!htop
-!kitty
-!neofetch
-!nvim
-!neovim_old
 !yabai
-!ranger
 !skhd
-!wal
 !alacritty.yamlREADME.md
 
 
@@ -20,13 +12,7 @@
 jj/repos
 jj/repos/*
 
-!.zshrc
-!nv.sh
-# !emacs-tree-sitter
-!wal
 !README.org
-!.p10k.zsh
-!oh-my-zsh-custom
 !sketchybar
 !.wezterm.lua
 !.raycast
@@ -35,12 +21,15 @@ jj/repos/*
 !wezterm
 !helix
 !gitu
+!jjui
 !raycast
 !zellij
 !launchagents
-!opencode
-opencode/plugin
-!home-manager
+opencode/plugin/*
+!opencode/plugin/
+!opencode/plugin/ntfy.js
+opencode/plugins/ntfy-debug.log
+opencode/plugins/ntfy-state.json
 !fish
 !eca
 !codex
@@ -48,11 +37,20 @@ opencode/plugin
 !nix-linux
 !nix-linux/**
 !images
+
+# Shared AI registry
+!agents
+!agents/**
 !Justfile
 
-.DS_Store
+# Generated AI links
+.pi/agents/AGENTS.md
+eca/skills
+opencode/skills
+opencode/AGENTS.md
+opencode/context-mode
 
-opencode/context-mode/sessions
+.DS_Store
 
 # Ignore backup files created by scripts/editors
 # Note: .gitignore doesn't support brace expansion like {number}?
@@ -60,6 +58,11 @@ opencode/context-mode/sessions
 **/*.bak
 **/*.backup
 **/*.bak[0-9]*
+**/__pycache__/
+**/*.pyc
+
+# Scripts
+!scripts
 
 # Raycast - only keep .rayconfig, extensions auto-install from Store
 raycast/extensions/
@@ -120,9 +123,8 @@ prowlarr-config
 # Emacs
 !emacs/
 emacs/**
-!emacs/README.org
+!emacs/*.org
 !emacs/elpaca.lock
-!emacs/HERLPERS.org
 !emacs/init.el
 !emacs/templates
 !emacs/templates/**
@@ -142,3 +144,44 @@ noctalia/*
 !noctalia/user-templates.toml
 !noctalia/colors.json
 !AGENTS.md
+
+
+# AI
+!opencode
+!.pi/
+.pi/*
+!.pi/agent/
+!.pi/extensions/
+!.pi/extensions/**
+!.pi/docs/
+!.pi/docs/**
+.pi/extensions/pi-ntfy-debug.log
+.pi/extensions/pi-ntfy-state.json
+!.pi/agents/
+!.pi/agents/**
+!.pi/themes/
+!.pi/themes/**
+.pi/agent/*
+!.pi/agent/agents/
+!.pi/agent/prompts/
+!.pi/agent/prompts/*.md
+!.pi/agent/settings.json
+!.pi/agent/*.md
+!.pi/agent/mcp.json
+.pi/skills
+.pi/agent/skills
+
+eca/ntfy-hook.log
+eca/ntfy-topic
+
+# Binaries — install via PM or build from source
+**/*.dylib
+**/*.so
+**/*.wasm
+**/*.js.map
+
+# Kitty themes — clone separately if needed
+kitty/kitty-themes/
+
+# Emacs tree-sitter compiled binaries
+emacs-tree-sitter/

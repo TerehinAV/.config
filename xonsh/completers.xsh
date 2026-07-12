@@ -32,18 +32,18 @@ def _package_json_scripts_completer(prefix, line, begidx, endidx, ctx):
             if name.startswith(prefix):
                 completions.add(RichCompletion(
                     name,
-                    display=f'{name}',
+                    display=name,
                     description=value[:50] if value else '',
                     append_space=True
                 ))
         
         return completions if completions else None
-    except:
+    except (json.JSONDecodeError, OSError):
         return None
 
 __xonsh__.completers['package_json_scripts'] = _package_json_scripts_completer
 __xonsh__.completers.move_to_end('package_json_scripts', last=False)
 
-# Disable slow completers (bash spawns subprocess, man parses manpages)
-completer remove bash
-completer remove man
+for _c in ['bash', 'man']:
+    __xonsh__.completers.pop(_c, None)
+del _c

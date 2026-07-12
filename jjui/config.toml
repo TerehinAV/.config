@@ -1,0 +1,187 @@
+# HNEI (colemak) / HJKL (qwerty) keybindings for jjui
+# Layout: colemak
+
+# --- Navigation ---
+
+[[bindings]]
+action = "revisions.move_down"
+key = "j"
+scope = "revisions"
+desc = "down"
+
+[[bindings]]
+action = "revisions.move_up"
+key = "k"
+scope = "revisions"
+desc = "up"
+
+[[bindings]]
+action = "revisions.open_details"
+key = "l"
+scope = "revisions"
+desc = "details"
+
+[[bindings]]
+action = "revset.edit"
+key = "shift+l"
+scope = "revisions"
+desc = "revset"
+
+# --- Displaced keys ---
+
+[[bindings]]
+action = "revisions.new"
+key = "n"
+scope = "revisions"
+desc = "new"
+
+[[bindings]]
+action = "revisions.edit"
+key = "e"
+scope = "revisions"
+desc = "edit"
+
+# --- Help scope ---
+
+[[bindings]]
+action = "help.scroll_down"
+key = "j"
+scope = "help"
+desc = "down"
+
+[[bindings]]
+action = "help.scroll_up"
+key = "k"
+scope = "help"
+desc = "up"
+
+# --- Diff scope ---
+
+[[bindings]]
+action = "diff.scroll_down"
+key = "j"
+scope = "diff"
+desc = "down"
+
+[[bindings]]
+action = "diff.scroll_up"
+key = "k"
+scope = "diff"
+desc = "up"
+
+[[bindings]]
+action = "diff.right"
+key = "l"
+scope = "diff"
+desc = "right"
+
+# --- Oplog scope ---
+
+[[bindings]]
+action = "oplog.move_down"
+key = "j"
+scope = "oplog"
+desc = "down"
+
+[[bindings]]
+action = "oplog.move_up"
+key = "k"
+scope = "oplog"
+desc = "up"
+
+# --- Bookmarks scope ---
+
+[[bindings]]
+action = "bookmarks.move_down"
+key = "j"
+scope = "bookmarks"
+desc = "down"
+
+[[bindings]]
+action = "bookmarks.move_up"
+key = "k"
+scope = "bookmarks"
+desc = "up"
+
+# --- Git scope ---
+
+[[bindings]]
+action = "git.move_down"
+key = "j"
+scope = "git"
+desc = "down"
+
+[[bindings]]
+action = "git.move_up"
+key = "k"
+scope = "git"
+desc = "up"
+
+# --- Choose scope ---
+
+[[bindings]]
+action = "choose.move_down"
+key = "j"
+scope = "choose"
+desc = "down"
+
+[[bindings]]
+action = "choose.move_up"
+key = "k"
+scope = "choose"
+desc = "up"
+
+# --- Revisions details scope ---
+
+[[bindings]]
+action = "revisions.details.move_down"
+key = "j"
+scope = "revisions.details"
+desc = "down"
+
+[[bindings]]
+action = "revisions.details.move_up"
+key = "k"
+scope = "revisions.details"
+desc = "up"
+
+# --- Revisions squash scope ---
+
+[[bindings]]
+action = "revisions.move_down"
+key = "j"
+scope = "revisions.squash"
+desc = "down"
+
+[[bindings]]
+action = "revisions.move_up"
+key = "k"
+scope = "revisions.squash"
+desc = "up"
+
+[[bindings]]
+action = "revisions.squash.keep_emptied"
+key = "e"
+scope = "revisions.squash"
+desc = "keep emptied"
+
+[[bindings]]
+action = "revisions.squash.interactive"
+key = "i"
+scope = "revisions.squash"
+desc = "interactive"
+
+# --- Evolog scope ---
+
+[[bindings]]
+action = "revisions.evolog.move_down"
+key = "j"
+scope = "revisions.evolog"
+desc = "down"
+
+[[bindings]]
+action = "revisions.evolog.move_up"
+key = "k"
+scope = "revisions.evolog"
+desc = "up"
+

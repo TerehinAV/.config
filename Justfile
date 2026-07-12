@@ -1,34 +1,16 @@
+# Interactive recipe chooser
 default:
     just --choose
 
+# Switch keyboard layout (colemak/qwerty); no arg = print current
+layout layout="":
+    ~/.config/scripts/layout {{ layout }}
+
+[private]
 fedora-deps:
-    if [ ! -f /etc/yum.repos.d/terra.repo ]; then \
-        sudo rpm -e terra-release 2>/dev/null || true; \
-        sudo env -u LD_LIBRARY_PATH dnf install -y --nogpgcheck \
-            --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release; \
-    fi
-    sudo dnf copr enable solopasha/hyprland
-    sudo env -u LD_LIBRARY_PATH dnf clean all
-    sudo env -u LD_LIBRARY_PATH dnf install -y --skip-unavailable \
-        noctalia-shell \
-        fastfetch \
-        freetype-devel libepoxy-devel fontconfig-devel cairo-devel \
-        pango-devel gtk4-devel libadwaita-devel libspiro-devel \
-        android-tools neohtop fontconfig pkg-config rustup earlyoom \
-        openssl-devel vulkan-loader-devel vulkan-headers shaderc \
-        docker docker-compose nodejs22 bun emacs hunspell \
-        hunspell-ru hunspell-en-US wl-clipboard enchant2-devel \
-        bitwarden swayidle sway-audio-idle-inhibit rclone libevdev-devel \
-        hyprland meson cmake cpio gcc-c++ gcc
+    ~/.config/scripts/setup-fedora-deps
 
-    sudo systemctl enable --now docker
-    sudo systemctl enable --now earlyoom
-    sudo usermod -aG docker $USER
-
-    sudo rpm -v --import https://yum.tableplus.com/apt.tableplus.com.gpg.key
-    sudo env -u LD_LIBRARY_PATH dnf config-manager addrepo --overwrite --from-repofile=https://yum.tableplus.com/rpm/arm64/tableplus.repo
-    sudo env -u LD_LIBRARY_PATH dnf install -y tableplus
-
+[private]
 flatpak:
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     flatpak install -y flathub io.github.seadve.Kooha
@@ -37,184 +19,176 @@ flatpak:
     flatpak install -y flathub eu.betterbird.Betterbird
     flatpak install -y flathub com.github.KRTirtho.Spotube
 
-volta:
-    volta install \
-    opencode-ai \
-    env-cmd \
-    node@22 \
-    @angular/language-service@next \
-    vscode-langservers-extracted \
-    @angular/cli \
-    copilot-node-server \
-    yalc \
-    lua-fmt \
-    @openai/codex \
-    @qwen-code/qwen-code@latest \
-    mcp-codex-cli \
-    @gy920/qwen-mcp-tool \
-    pretty-ts-errors-markdown \
-    playwright \
-    typescript \
-    typescript-language-server \
-    @angular/language-server \
-    @vue/language-server \
-    @github/copilot-language-server \
-    eslint \
-    npm-check-updates \
-    npm-upgrade \
-    stylelint \
-    @mermaid-js/mermaid-cli
+# Install mise tools and trust config (mise.toml → deployed)
+mise:
+    mise install
+    mise trust ~/.config/mise.toml
 
-cargo:
-    just _cargo-{{os()}}
-    cargo install gitu kdlfmt
-    cargo install codebook-lsp
+[private]
+mise-bump:
+    ~/.config/scripts/upgrade
 
-_cargo-linux:
-    PKG_CONFIG_PATH=/usr/lib64/pkgconfig
-    LD_LIBRARY_PATH=/usr/lib64
-    cargo install wl-screenrec
-
-_cargo-macos:
-    :
-    
-go:
-    go install golang.org/x/tools/gopls@latest
-
-uv:
-    uv tool install rassumfrassum 
-    uv tool install ty
-    uv tool install basedpyright
-    uv tool install httpie
-    uv tool install http-prompt
-  
-    
-[working-directory("./nix-linux")]
-nix-linux:
-    nix run home-manager/master -- switch --flake . --impure
-
-nix-mac:
-    just nix-home-mac
-    just nix-darwin-mac
-
+# Apply chezmoi config and rebuild Nix (home-manager switch / darwin-rebuild)
 [working-directory("./nix")]
-nix-darwin-mac:
-    sudo -v
-    sudo sh -c 'for f in /etc/bashrc /etc/zshrc; do if [ -f "$f" ]; then backup="$f.before-nix-darwin"; if [ ! -e "$backup" ]; then mv "$f" "$backup"; else ts=$(date +%Y%m%d%H%M%S); mv "$f" "$backup.$ts"; fi; fi; done'
-    sudo -v && sudo -H env NIX_CONFIG="experimental-features = nix-command flakes" nix run nix-darwin/master#darwin-rebuild -- switch --flake /Users/andrey/.config/nix#$(hostname -s)
-    @echo "Successfully applied Nix configuration for macOS."
-
-[working-directory("./nix")]
-nix-home-mac:
-    nix run home-manager/master -- switch -b backup --flake ~/.config/nix#andrey
-    @echo "Successfully applied Home Manager configuration for macOS."
-
-[working-directory("./nix")]
-nix-clean-mac:
-    find "$$HOME" \
-        -path "$$HOME/OrbStack/*" -prune -o \
-        -path "$$HOME/Library/Containers/*" -prune -o \
-        -xtype l -print0 | while IFS= read -r -d '' link; do \
-            echo "Removing broken link: $$link"; \
-            rm -f "$$link" 2>/dev/null || true; \
-        done
-
-[working-directory("/tmp")]
-manual-deps:
-    rm -rf /tmp/hyprvoice
-    cd /tmp
-    git clone https://github.com/leonardotrapani/hyprvoice.git
-    cd /tmp/hyprvoice
-    go mod download
-    go build -o hyprvoice ./cmd/hyprvoice
-    mkdir -p ~/.local/bin
-    cp hyprvoice ~/.local/bin/
-
-    rm -rf /tmp/trackpad-is-too-damn-big
-    git clone https://github.com/tascvh/trackpad-is-too-damn-big /tmp/trackpad-is-too-damn-big
-    cmake -B /tmp/trackpad-is-too-damn-big/build -S /tmp/trackpad-is-too-damn-big
-    make -C /tmp/trackpad-is-too-damn-big/build
-    sudo cp /tmp/trackpad-is-too-damn-big/build/titdb /usr/local/bin/titdb
-
-hyprland-plugins:
-    env -i HOME="$HOME" PATH="/usr/bin:/usr/sbin:/bin:/sbin" PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/usr/share/pkgconfig" XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_INSTANCE_SIGNATURE" hyprpm update -f
-    env -i HOME="$HOME" PATH="/usr/bin:/usr/sbin:/bin:/sbin" PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/usr/share/pkgconfig" XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_INSTANCE_SIGNATURE" hyprpm add https://github.com/hyprwm/hyprland-plugins || true
-    hyprpm enable hyprexpo || true
-    hyprpm enable hyprfocus || true
-    hyprpm reload
-
-systemd-services:
+nix:
     #!/usr/bin/env bash
     set -euo pipefail
-    sudo tee /etc/systemd/system/titdb.service > /dev/null <<'EOF'
-    [Unit]
-    Description=Trackpad is too damn big - palm rejection for Apple trackpad
-    After=multi-user.target
+    chezmoi apply --force
+    git -C "$HOME/.config" add -A
+    case "$(uname -s)" in
+        Darwin)
+            sudo -v
+            sudo /run/current-system/sw/bin/darwin-rebuild switch --flake "$HOME/.config/nix" --impure
+            nix run home-manager/master -- switch -b backup --flake ".#${USER}@mac" --impure
+            ;;
+        Linux)
+            nix run home-manager/master -- switch -b backup --flake ".#${USER}@linux" --impure
+            ;;
+        *)
+            echo "Unsupported OS: $(uname -s)" >&2
+            exit 1
+            ;;
+    esac
 
-    [Service]
-    ExecStart=/usr/local/bin/titdb -d /dev/input/by-path/platform-39b10c000.spi-cs-0-event-mouse -l 10 -r 15 -t 15 -b 10
-    Restart=on-failure
-    RestartSec=3
+# Update nix flake inputs (flake.lock); readd=true also saves lock to chezmoi sources
+[working-directory("./nix")]
+nix-update readd="false":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    nix flake update
+    if [ "{{ readd }}" = "true" ]; then
+        chezmoi re-add "$HOME/.config/nix/flake.lock"
+    fi
 
-    [Install]
-    WantedBy=multi-user.target
-    EOF
-    sudo systemctl daemon-reload
-    sudo systemctl enable titdb.service
-    sudo systemctl restart titdb.service
+[private]
+nix-clean:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ "$(uname -s)" != "Darwin" ]; then
+        exit 0
+    fi
+    find "$HOME" \
+        -path "$HOME/OrbStack/*" -prune -o \
+        -path "$HOME/Library/Containers/*" -prune -o \
+        \( -type l ! -exec test -e {} \; -print0 \) | \
+        while IFS= read -r -d '' link; do \
+            echo "Removing broken link: $link"; \
+            rm -f "$link" 2>/dev/null || true; \
+        done
 
+[private]
+manual-deps:
+    ~/.config/scripts/setup-manual-deps
+
+[private]
+systemd-services:
+    ~/.config/scripts/setup-systemd-services
+
+[private]
 fedora-files:
-    ln -s /home/darkawower/.config/vicinae/scripts /home/darkawower/.local/share/vicinae/scripts
-    echo "darkawower ALL=(root) NOPASSWD: /home/darkawower/.local/bin/cpu-profile-apply" | sudo tee /etc/sudoers.d/cpu-profile
+    ln -s "$HOME/.config/vicinae/scripts" "$HOME/.local/share/vicinae/scripts"
+    echo "$(whoami) ALL=(root) NOPASSWD: $HOME/.local/bin/cpu-profile-apply" | sudo tee /etc/sudoers.d/cpu-profile
     sudo chmod 440 /etc/sudoers.d/cpu-profile
 
-init-linux:
-    just flatpak
-    just fedora-deps
-    just nix-linux
-    just volta
-    just uv
-    just manual-deps
-    just fedora-files
-    just systemd-services
-    just hyprland-plugins
+# Bootstrap current OS from scratch (packages, Nix, mise, services)
+init:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    case "$(uname -s)" in
+        Linux)
+            just flatpak
+            just fedora-deps
+            just nix
+            just mise
+            uv tool upgrade --all
+            just manual-deps
+            just fedora-files
+            just systemd-services
+            ;;
+        Darwin)
+            just quasiqwerty
+            just nix
+            just nix-clean
+            just mise
+            uv tool upgrade --all
+            ;;
+    esac
 
-init-mac:
-    just volta
-    just uv
-    just nix-darwin-mac
-    just nix-home-mac
-    just uv
-    just go
-    just cargo
-    just nix-clean-mac
+# Fedora major-version upgrade. Downloads first, then reboots into offline upgrade.
+fedora-upgrade VERSION="44":
+    sudo env -u LD_LIBRARY_PATH dnf system-upgrade download --releasever={{VERSION}} --allowerasing
+    sudo env -u LD_LIBRARY_PATH dnf system-upgrade reboot
 
+# Full sync: upgrade everything, bump version pins, save state to chezmoi sources
+sync:
+    just upgrade
+    just mise-bump
+    chezmoi re-add "$HOME/.config/nix/flake.lock"
+    chezmoi re-add ~/.pi/agent/settings.json
 
-# Safe daily cleanup for Linux
-clean-linux:
-    @echo "=== Nix cleanup ==="
+# Upgrade everything: OS packages, Nix flake inputs + rebuild, mise tools, uv, pi extensions
+upgrade:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    case "$(uname -s)" in
+        Linux)
+            sudo env -u LD_LIBRARY_PATH dnf upgrade --refresh -y
+            flatpak update -y
+            ;;
+        Darwin)
+            ;;
+        *)
+            echo "Unsupported OS: $(uname -s)" >&2
+            exit 1
+            ;;
+    esac
+    just nix-update readd=true
+    just nix
+    mise upgrade --exclude pnpm
+    mise trust ~/.config/mise.toml
+    uv tool upgrade --all
+    if [ "$(uname -s)" = "Linux" ]; then
+        just manual-deps
+    fi
+    pi update --extensions
+    printenv > ~/.emacs.d/.local/env
+
+# Garbage-collect Nix store, prune Docker, clean OS package caches
+clean:
+    #!/usr/bin/env bash
+    set -euo pipefail
     nix-collect-garbage --delete-older-than 7d
     nix-store --optimise 2>/dev/null || true
-    
-    @echo "\n=== Docker cleanup ==="
     docker system prune -f 2>/dev/null || true
     docker builder prune -f --filter "until=24h" 2>/dev/null || true
-    
-    @echo "\n=== DNF cleanup ==="
-    sudo dnf clean all
-    
-    @echo "\n=== Journal cleanup (keep last 7 days) ==="
-    sudo journalctl --vacuum-time=7d
-    
-    @echo "\n=== Thumbnail cache ==="
-    rm -rf ~/.cache/thumbnails/* 2>/dev/null || true
-    
-    @echo "\n=== Broken symlinks ==="
-    find "$HOME" -xtype l -print0 2>/dev/null | \
-        while IFS= read -r -d '' link; do \
-            echo "Removing: $$link"; \
-            rm -f "$$link" 2>/dev/null || true; \
-        done
-    
-    @echo "\n=== Done! ==="
-    df -h /
+    case "$(uname -s)" in
+        Linux)
+            sudo dnf clean all
+            sudo journalctl --vacuum-time=7d
+            ;;
+        Darwin)
+            brew cleanup
+            ;;
+    esac
+
+# Print environment diagnostics (shell, PATH, toolchain locations)
+doctor:
+    @echo "Shell: $$SHELL"
+    @echo "PATH entries:"; printf '%s\n' "$${PATH//:/\n}"
+    @echo "LD_LIBRARY_PATH=$${LD_LIBRARY_PATH-<unset>}"
+    @echo "which ld: $$(which ld || true)"
+    @echo "ldd --version:"; ldd --version | head -n1 || true
+    @echo "rustc: $$(command -v rustc || true)"
+    @echo "cargo: $$(command -v cargo || true)"
+
+[private]
+quasiqwerty:
+    ~/.config/scripts/setup-quasiqwerty
+
+# Apply chezmoi dotfiles (source → deployed)
+apply:
+    chezmoi apply
+
+
+help:
+    just --list

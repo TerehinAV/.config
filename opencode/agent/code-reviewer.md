@@ -1,7 +1,7 @@
 ---
 description: Reviews code for best practices and potential issues
 mode: subagent
-model: github-copilot/gpt-5.4
+model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   write: false

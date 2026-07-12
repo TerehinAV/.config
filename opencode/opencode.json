@@ -4,12 +4,16 @@
     "opencode-openai-codex-auth@1.0.2",
     "oh-my-openagent",
     "opencode-antigravity-auth@1.6.0",
+    "opencode-kilo-auth@latest",
+    "opentmux",
+    "@slkiser/opencode-quota",
+    "opencode-wakatime",
+    // "@pantheon-ai/opencode-warcraft-notifications",  // disabled - sound effects
     "context-mode"
   ],
   "agent": {
     "translator": {
       "description": "Manually edits i18n dictionary files. Always updates keys and values by hand according to provided i18n errors and user-specified words. Automatic generation is strictly forbidden, as is removing existing words. Must use jq utility for nested dictionaries.",
-      "model": "github-copilot/gpt-4.1",
       "mode": "subagent",
       "prompt": "{file:./prompts/translator.txt}",
       "tools": {
@@ -30,9 +34,7 @@
         "reasoningEffort": "medium",
         "reasoningSummary": "auto",
         "textVerbosity": "medium",
-        "include": [
-          "reasoning.encrypted_content"
-        ],
+        "include": ["reasoning.encrypted_content"],
         "store": false
       },
       "models": {
@@ -43,13 +45,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "none": {
@@ -86,13 +83,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
@@ -124,13 +116,8 @@
             "output": 128000
           },
           "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
@@ -169,14 +156,8 @@
             "output": 65535
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
           }
         },
         "antigravity-gemini-3-pro-low": {
@@ -188,14 +169,8 @@
             "output": 65535
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
           }
         },
         "antigravity-gemini-3-flash": {
@@ -206,14 +181,8 @@
             "output": 65536
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
           }
         }
       }
@@ -230,10 +199,30 @@
     },
     "context7": {
       "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp@latest"]
+    },
+    "codex-cli": {
+      "type": "local",
+      "enabled": false,
+      "command": ["mcp-codex-cli", "--allow-npx"]
+    },
+    "gemini": {
+      "type": "local",
+      "enabled": false,
+      "command": ["npx", "-y", "gemini-mcp-tool"]
+    },
+    "deepcontext": {
+      "type": "local",
+      "command": ["npx", "-y", "@wildcard-ai/deepcontext@latest"]
+    },
+    "sentry": {
+      "type": "local",
+      "enabled": false,
       "command": [
         "npx",
         "-y",
-        "@upstash/context7-mcp@latest"
+        "mcp-remote@latest",
+        "https://mcp.sentry.dev/mcp"
       ]
     },
     "serena": {
@@ -250,21 +239,47 @@
     },
     "playwright": {
       "type": "local",
+      "command": ["npx", "@playwright/mcp@latest"]
+    },
+    "youtrack": {
+      "type": "local",
       "command": [
         "npx",
-        "@playwright/mcp@latest"
+        "mcp-remote",
+        "https://verifika.youtrack.cloud/mcp",
+        "--header",
+        "{env:YOUTRACK_AUTH_HEADER}"
+      ]
+    },
+    "qwen": {
+      "type": "local",
+      "enabled": false,
+      "command": ["npx", "-y", "jeffery9/qwen-mcp-tool"]
+    },
+    "deepseek": {
+      "type": "local",
+      "enabled": false,
+      "command": ["npx", "-y", "deepseek-mcp-server"]
+    },
+    "toon-context": {
+      "type": "local",
+      "enabled": false,
+      "command": [
+        "bun",
+        "/Users/andrey/apps/TOON-context-mcp-server/toon-context-mcp/build/index.js"
       ]
     },
     "context-mode": {
       "type": "local",
-      "command": [
-        "context-mode"
-      ]
+      "command": ["context-mode"]
     },
-    "exa": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp",
-      "enabled": true
+    "mem0": {
+      "type": "local",
+      "command": ["uvx", "mem0-mcp-server"]
+    },
+    "qmd": {
+      "type": "local",
+      "command": ["qmd", "mcp"]
     }
   }
 }

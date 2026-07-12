@@ -1,7 +1,7 @@
 ---
 mode: subagent
 description: Reviews implemented changes against the original plan and code quality standards. Read-only — checks git diff, validates acceptance criteria, flags issues. Use after executor finished.
-model: anthropic/claude-haiku-4-5-20251001
+model: openai-codex/gpt-5.4-mini
 tools:
   byDefault: deny
   allow:
