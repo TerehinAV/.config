@@ -1,7 +1,7 @@
 ---
 name: typescript-pro
 description: Master TypeScript with advanced types, generics, and strict type safety. Handles complex type systems, decorators, and enterprise-grade patterns. Use PROACTIVELY for TypeScript architecture, type inference optimization, or advanced typing patterns.
-model: zai-coding-plan/glm-4.7
+model: openai/gpt-5.2-codex
 temperature: 0.1
 tools:
   write: true

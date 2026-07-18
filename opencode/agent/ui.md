@@ -1,7 +1,7 @@
 ---
 name: ui-ux-designer
 description: Design interfaces, components, and design systems. Focus on accessibility, simplicity, and consistency. Use for component structure, layout specs, interaction states, and accessibility requirements.
-model: openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+model: openai/gpt-5.4
 temperature: 0.1
 tools:
   write: false

@@ -1,7 +1,7 @@
 ---
 description: Critically evaluates software architecture and implementation plans. Flags over-engineering, coupling issues, missing pieces, and design flaws. Read-only — never modifies code or plans.
 mode: subagent
-model: openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+model: openai/gpt-5.4
 tools:
   write: false
   edit: false

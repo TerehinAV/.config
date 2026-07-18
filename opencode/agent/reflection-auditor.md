@@ -2,7 +2,7 @@
 name: reflection-auditor
 description: Critical reviewer and audit specialist for evaluating another agent’s output. Performs reflection, adversarial analysis, factual cross-checking, internet-backed validation, risk assessment, and overall quality audit. Use PROACTIVELY when a solution needs skepticism, verification, gap analysis, or an independent second opinion.
 mode: subagent
-model: zai-coding-plan/glm-4.7
+model: openai/gpt-5.4
 temperature: 0.1
 tools:
   write: false
