@@ -7,10 +7,13 @@
 // If you want to maintain a configuration file with your own comments and formatting, you should create a separate file and add it to the 'imports' array.
 //
 // Learn more about configuration at https://docs.vicinae.com/config
-
 {
    "$schema": "https://vicinae.com/schemas/config.json",
    "pop_to_root_on_close": true,
+   "font": {
+      "rendering": "qt",
+      "normal": {}
+   },
    "theme": {
       "light": {
          "name": "noctalia",
@@ -22,7 +25,10 @@
       }
    },
    "launcher_window": {
-      "opacity": 0.95
+      "opacity": 0.95,
+      "compact_mode": {
+         "enabled": true
+      }
    },
    "keybinds": {
       "toggle-action-panel": "super+K"
@@ -34,18 +40,34 @@
       "applications:org.telegram"
    ],
    "providers": {
+      "@benvp/store.raycast.audio-device": {
+         "preferences": {
+            "favourite": "",
+            "favourite2": "",
+            "systemOutput": true
+         }
+      },
+      "@lardissone/store.raycast.raindrop-io": {
+         "preferences": {
+            "additionalItemToDisplayInList": "link",
+            "displayDate": "lastUpdated",
+            "fetchAllResults": true,
+            "sortBy": "",
+            "tagsDisplay": "1",
+            "titleOnly": false,
+            "useLastCollection": false
+         },
+         "entrypoints": {
+            "search": {
+               "shortcut": "control+shift+L"
+            }
+         }
+      },
       "applications": {
          "preferences": {
             "paths": [
-               "/home/darkawower/.local/share/applications",
-               "/nix/store/7swls12w7nxpnqwgyc4my85l9jw0s51x-vicinae-0.18.3/share/applications",
-               "/nix/store/zcw1bhk79g80hs9f2l5zsb5w1xsb4y6c-cups-2.4.16/share/applications",
-               "/var/lib/flatpak/exports/share/applications",
-               "/usr/local/share/applications",
-               "/usr/share/applications",
-               "/home/darkawower/.nix-profile/share/applications",
-               "/home/darkawower/.config/scripts",
-               "/home/darkawower/.config/vicinae"
+               "/Users/andrey/.local/share/applications",
+               "/Users/andrey/.config/vicinae"
             ]
          },
          "entrypoints": {
@@ -57,16 +79,47 @@
       "clipboard": {
          "entrypoints": {
             "history": {
-               "alias": "cp"
+               "alias": "cp",
+               "shortcut": "control+SPACE"
             }
          }
       },
-      "core": {
+      "@krzysztoff1/store.raycast.yabai": {
          "entrypoints": {
-            "search-emojis": {
-               "alias": "sm"
+            "search-windows": {
+               "shortcut": "alt+TAB"
             }
          }
+      },
+
+      "core": {
+         "entrypoints": {
+            "about": {
+               "enabled": false
+            },
+            "documentation": {
+               "enabled": true
+            },
+            "manage-fallback": {
+               "enabled": false
+            },
+            "report-bug": {
+               "enabled": true
+            },
+            "search-emojis": {
+               "alias": "sm",
+               "shortcut": "cmd+shift+space"
+            },
+            "sponsor": {
+               "enabled": false
+            }
+         }
+      },
+      "manage-shortcuts": {
+         "enabled": false
+      },
+      "snippets": {
+         "enabled": true
       }
    }
 }

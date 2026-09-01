@@ -17,7 +17,14 @@ function theme_config.get_appearance_themes()
 end
 
 function theme_config.get_initial_theme_name()
-  return "Tokyo Night"
+  if wezterm.gui and wezterm.gui.get_appearance then
+    local appearance = wezterm.gui.get_appearance()
+    if appearance:find("Dark") then
+      return "Tokyo Night"
+    end
+  end
+
+  return "Catppuccin Latte"
 end
 
 function theme_config.get_theme_overrides(theme_name)
@@ -83,7 +90,7 @@ end
 if not wezterm.target_triple:find("linux") then
   local current_path = os.getenv("PATH") or ""
   local home = os.getenv("HOME") or ""
-  local my_paths = "/opt/homebrew/bin:" .. home .. "/.nix-profile/bin:/usr/local/bin:" .. current_path
+  local my_paths = "/opt/homebrew/bin:" .. home .. "/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:" .. current_path
 
   config.set_environment_variables = {
     PATH = my_paths
@@ -99,7 +106,8 @@ wezterm.on(
     if current_theme then
       theme_config.apply_theme_to_window(window, current_theme)
     else
-      local theme_name = theme_config.get_initial_theme_name()
+      local themes = theme_config.get_appearance_themes()
+      local theme_name = themes[(window_id % #themes) + 1]
       theme_config.apply_theme_to_window(window, theme_name)
     end
   end
@@ -182,8 +190,5 @@ config.keys = {
 }
 
 config.default_prog = { "zellij" }
--- config.set_environment_variables = {
---   PATH = "<home>/.nix-profile/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
--- }
 
 return config

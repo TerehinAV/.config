@@ -192,3 +192,23 @@ apply:
 
 help:
     just --list
+
+# Kaizen management
+
+kaizen-sync:
+    kaizen sync
+
+kaizen-update:
+    kaizen update
+
+kaizen-self-update:
+    kaizen self-update
+
+kaizen-bump:
+    kaizen bump
+
+kaizen-capture:
+    kaizen capture
+
+kaizen-status:
+    kaizen status

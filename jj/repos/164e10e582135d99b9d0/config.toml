@@ -1,2 +1,0 @@
-[revset-aliases]
-"trunk()" = "master@origin"

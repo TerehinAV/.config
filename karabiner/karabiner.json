@@ -14,9 +14,13 @@
               {
                 "from": {
                   "key_code": "caps_lock",
-                  "modifiers": { "optional": ["any"] }
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
                 },
-                "parameters": { "basic.to_if_alone_timeout_milliseconds": 250 },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 250
+                },
                 "to": [
                   {
                     "key_code": "right_shift",
@@ -41,7 +45,9 @@
               {
                 "from": {
                   "key_code": "caps_lock",
-                  "modifiers": { "optional": ["any"] }
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
                 },
                 "to": [
                   {
@@ -64,7 +70,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "right_option" }],
+                "to": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -75,7 +85,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "right_option" }],
+                "to": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
                 "type": "basic"
               }
             ]
@@ -147,7 +161,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "up_arrow" }],
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -158,7 +176,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "down_arrow" }],
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -169,7 +191,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "left_arrow" }],
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -180,7 +206,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "right_arrow" }],
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
                 "type": "basic"
               }
             ]
@@ -254,7 +284,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "up_arrow" }],
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -265,7 +299,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "down_arrow" }],
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -276,7 +314,11 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "left_arrow" }],
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -287,19 +329,26 @@
                     "optional": ["any"]
                   }
                 },
-                "to": [{ "key_code": "right_arrow" }],
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
                 "type": "basic"
               }
             ]
           },
           {
-            "description": "Remap Shift + Tab to Ctrl + J in Firefox",
+            "description": "Browsers: tab navigation with QWERTY Ctrl+J/K and Colemak Ctrl+N/E",
             "manipulators": [
               {
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^org\\.mozilla\\.com\\.zen\\.browser$"
+                      "^org\\.mozilla\\.firefox$",
+                      "^org\\.mozilla\\.com\\.zen\\.browser$",
+                      "^app\\.zen-browser\\.zen$",
+                      "^net\\.imput\\.helium$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -308,7 +357,7 @@
                   "key_code": "j",
                   "modifiers": {
                     "mandatory": ["left_control"],
-                    "optional": ["any"]
+                    "optional": ["caps_lock"]
                   }
                 },
                 "to": [
@@ -323,7 +372,10 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^org\\.mozilla\\.com\\.zen\\.browser$"
+                      "^org\\.mozilla\\.firefox$",
+                      "^org\\.mozilla\\.com\\.zen\\.browser$",
+                      "^app\\.zen-browser\\.zen$",
+                      "^net\\.imput\\.helium$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -332,32 +384,13 @@
                   "key_code": "k",
                   "modifiers": {
                     "mandatory": ["left_control"],
-                    "optional": ["any"]
-                  }
-                },
-                "to": [{ "key_code": "up_arrow" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^org\\.mozilla\\.com\\.zen\\.browser$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": ["left_control"],
-                    "optional": ["any"]
+                    "optional": ["caps_lock"]
                   }
                 },
                 "to": [
                   {
                     "key_code": "tab",
-                    "modifiers": ["left_control", "shift"]
+                    "modifiers": ["left_control", "left_shift"]
                   }
                 ],
                 "type": "basic"
@@ -366,78 +399,34 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^org\\.mozilla\\.com\\.zen\\.browser$"
+                      "^org\\.mozilla\\.firefox$",
+                      "^org\\.mozilla\\.com\\.zen\\.browser$",
+                      "^app\\.zen-browser\\.zen$",
+                      "^net\\.imput\\.helium$"
                     ],
                     "type": "frontmost_application_if"
                   }
                 ],
-                "from": { "key_code": "f14" },
-                "to": [{ "key_code": "f6" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^app\\.zen-browser\\.zen$"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
                 "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": ["left_control"],
-                    "optional": ["any"]
-                  }
+                  "key_code": "f14"
                 },
                 "to": [
                   {
-                    "key_code": "tab",
-                    "modifiers": ["left_control"]
+                    "key_code": "f6"
                   }
                 ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^app\\.zen-browser\\.zen$"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": ["left_control"],
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "tab",
-                    "modifiers": ["left_control", "shift"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^app\\.zen-browser\\.zen$"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": { "key_code": "f14" },
-                "to": [{ "key_code": "f6" }],
                 "type": "basic"
               }
             ],
-            "title": "Remap Shift + Tab to Ctrl + J for Firefox"
+            "title": "Browsers: Ctrl+J/K physical tab navigation"
           }
         ]
       },
       "name": "Default profile",
       "selected": true,
-      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+      "virtual_hid_keyboard": {
+        "keyboard_type_v2": "ansi"
+      }
     }
   ]
 }
