@@ -1,7 +1,6 @@
 ---
 description: Designs software architecture and produces an actionable implementation plan. Read-only — never modifies code.
 mode: subagent
-model: zai-coding-plan/glm-5.2
 tools:
   write: false
   edit: false

@@ -148,6 +148,7 @@ noctalia/*
 
 # AI
 !opencode
+opencode-presets
 !.pi/
 .pi/*
 !.pi/agent/

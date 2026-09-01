@@ -91,3 +91,5 @@ if platform.system() == 'Linux':
     if 'QT_PLUGIN_PATH' in ${...}:
         del $QT_PLUGIN_PATH
     del _share_dir
+
+$PATH.append($HOME + "/.config/opencode-presets/bin")

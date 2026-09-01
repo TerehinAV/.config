@@ -229,7 +229,7 @@ l = [":toggle-option soft-wrap.enable", ":redraw"]
 ]
 
 [keys.normal.space.g]
-"l" = [
+"L" = [
     ":write-all",
     ":insert-output gitu >/dev/tty",
     ":redraw",
@@ -309,4 +309,3 @@ K = "extend_next_long_word_end"
 L = "insert_at_line_start"
 e = ["extend_line_up", "extend_to_line_bounds"]
 n = ["extend_line_down", "extend_to_line_bounds"]
-
