@@ -141,7 +141,7 @@ lctrl + ralt + rshift + lshift - l : /opt/homebrew/bin/yabai -m window --insert 
 ralt + rshift + lshift - space : /opt/homebrew/bin/yabai -m window --toggle float
 
 # Restart /Opt/Homebrew/Bin/Yabai
-lctrl + ralt + rshift + lshift - r : 
+lctrl + ralt + rshift + lshift - r :
     /usr/bin/env osascript <<< \
         "display notification \"Restarting /Opt/Homebrew/Bin/Yabai\" with title \"/Opt/Homebrew/Bin/Yabai\""; \
     /opt/homebrew/bin/yabai --stop-service; \
@@ -149,17 +149,17 @@ lctrl + ralt + rshift + lshift - r :
 
 # launchctl kickstart -k "gui/${UID}/homebrew.mxcl./opt/homebrew/bin/yabai"
 # restart sketchybar
-# shift + lctrl + alt - s : 
+# shift + lctrl + alt - s :
 #     /usr/bin/env osascript <<< \
 #         "display notification \"Restarting Sketchybar\" with title \"Sketchybar\""; \
 #     launchctl kickstart -k "gui/${UID}/homebrew.mxcl.sketchybar"
 
 # Restart skhd
 
-lctrl + ralt + rshift + lshift - s : 
+lctrl + ralt + rshift + lshift - s :
     /usr/bin/env osascript <<< \
         "display notification \"Restarting Skhd\" with title \"SKHD\""; \
-    skhd --restart-sevice
+    skhd --restart-service
 
 # Zen mode
 lcmd + ralt + rshift - l : /opt/homebrew/bin/yabai -m config window_opacity off

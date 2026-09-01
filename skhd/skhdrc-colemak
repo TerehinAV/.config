@@ -102,7 +102,7 @@ lcmd + lctrl + ralt + rshift - i : /opt/homebrew/bin/yabai -m window --insert ea
 
 lcmd + ralt + rshift - space : /opt/homebrew/bin/yabai -m window --toggle float
 
-lalt + ralt + rshift - r : 
+lalt + ralt + rshift - r :
     /usr/bin/env osascript <<< \
         "display notification \"Restarting /Opt/Homebrew/Bin/Yabai\" with title \"/Opt/Homebrew/Bin/Yabai\""; \
     /opt/homebrew/bin/yabai --stop-service; \
@@ -110,10 +110,10 @@ lalt + ralt + rshift - r :
 
 
 
-lcmd + lctrl + ralt + rshift - s : 
+lcmd + lctrl + ralt + rshift - s :
     /usr/bin/env osascript <<< \
         "display notification \"Restarting Skhd\" with title \"SKHD\""; \
-    skhd --restart-sevice
+    skhd --restart-service
 
 lalt + ralt + rshift - i : /opt/homebrew/bin/yabai -m config window_opacity off
 lalt + ralt + rshift - o : /opt/homebrew/bin/yabai -m config window_opacity on
@@ -191,5 +191,5 @@ cmd + lctrl + ralt + rshift - r: /opt/homebrew/bin/yabai --start-service
 ralt + rshift - b: $HOME/.config//opt/homebrew/bin/yabai/toggle-bar.sh
 
 lctrl + ralt + rshift + lcmd - m: /opt/homebrew/bin/python3 $HOME/.config/yabai/init.py
-  
+
 lctrl + ralt + rshift + lcmd - t : /opt/homebrew/bin/python3 /Users/darkawower/.config/yabai/scratchpad.py toggle term
